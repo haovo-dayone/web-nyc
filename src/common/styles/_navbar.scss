@@ -1,0 +1,29 @@
+.navbar {
+  height: 4rem;
+  img {
+    vertical-align: top;
+  }
+  .text {
+    font-weight: 700;
+    font-style: 1.5rem;
+  }
+  a {
+    height: 100%;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 3rem;
+    img {
+      padding-left: 0;
+    }
+    .icon {
+      top: 0.5rem !important;
+    }
+  }
+  .icon {
+    top: 1rem;
+  }
+  .navbar-toggler {
+    border: none;
+  }
+}
