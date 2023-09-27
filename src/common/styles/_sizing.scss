@@ -1,3 +1,7 @@
+div {
+  height: fit-content;
+}
+
 @media (max-width: 600px) {
   // .pe-sm-1 {
   //   padding-right: 0.5rem !important;
@@ -7,4 +11,7 @@
   .container {
     max-width: 1660px;
   }
+}
+.title {
+  font-size: 15px;
 }

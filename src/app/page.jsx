@@ -58,13 +58,13 @@ const Home = () => {
       <section className="carousel">
         <Carousel>
           <Carousel.Item interval={1000}>
-            <img src="/assets/img/logo/carousel1.webp"></img>
+            <img src="/assets/img/carousel/carousel1.webp"></img>
           </Carousel.Item>
           <Carousel.Item interval={500}>
-            <img src="/assets/img/logo/carousel2.webp"></img>
+            <img src="/assets/img/carousel/carousel2.webp"></img>
           </Carousel.Item>
           <Carousel.Item>
-            <img src="/assets/img/logo/carousel3.webp"></img>
+            <img src="/assets/img/carousel/carousel3.webp"></img>
           </Carousel.Item>
         </Carousel>
       </section>
