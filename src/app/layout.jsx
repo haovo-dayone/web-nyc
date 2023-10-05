@@ -1,5 +1,8 @@
 import { Inter } from "next/font/google";
 import "@/common/styles/index.scss";
+import "react-multi-carousel/lib/styles.css";
+import Footer from "@/common/components/Footer";
+import NYCNavbar from "@/common/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +20,11 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NYCNavbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

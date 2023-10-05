@@ -1,0 +1,21 @@
+.video {
+  a.video-source {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50rem;
+    // padding-top: calc(100% * 32 / 57);
+    img {
+      position: absolute;
+      // width: 100%;
+      // height: 100%;
+      // left: 0;
+      // top: 0;
+    }
+    svg {
+      position: absolute;
+      // top: calc((100% - 80px) / 2);
+    }
+  }
+}

@@ -10,6 +10,7 @@ const Product = ({ item }) => {
         onMouseEnter={() => setImageHover(true)}
         onMouseLeave={() => setImageHover(false)}
       >
+        {item.rank && <></>}
         <img className={imageHover && "d-none"} src={item.images[0]}></img>
         <img className={imageHover && "d-block"} src={item.images[1]}></img>
         <span className="heart">
@@ -33,6 +34,9 @@ const Product = ({ item }) => {
       </div>
       <div className="bg-white">
         <h4 className="title p-2">{item.title}</h4>
+        {item.price ? <span className="price p-2">{item.price}</span> : ""}
+        {/* {item.price && <span className="price p-2">{item.price}</span>} */}
+
         <div className="d-flex ps-2">
           {item.colors.map((c) => (
             <div className="color m-1" style={{ backgroundColor: c }}></div>

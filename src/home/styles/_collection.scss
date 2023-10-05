@@ -15,11 +15,6 @@
   padding-top: 45px;
   height: unset;
 
-  .product {
-    min-width: 20rem;
-    min-height: 30rem;
-  }
-
   // &:hover {
   //   img {
   //     &:first-child {
@@ -32,11 +27,12 @@
   //   }
   // }
 }
-.color {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
+
+.product {
+  min-width: 20rem;
+  min-height: 30rem;
 }
+
 .product__images {
   position: relative;
   img {
@@ -50,4 +46,8 @@
     top: 5px;
     right: 5px;
   }
+}
+ul.react-multi-carousel-track li {
+  width: 20rem !important;
+  margin-right: 1rem;
 }

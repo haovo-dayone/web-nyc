@@ -1,6 +1,16 @@
-import { useEffect, useState } from "react";
-import Product from "./Product";
+"use client";
+import { useState } from "react";
 import CollectionTab from "./CollectionTab";
+import Carousel from "react-multi-carousel";
+import Product from "./Product";
+// import OwlCarousel from "react-owl-carousel";
+// let owl_carousel = require("owl.carousel");
+// console.log(owl_carousel);
+// window.fn = owl_carousel;
+// import $ from "jquery";
+// window.jQuery = $;
+// console.log($.fn);
+
 const items = [
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -9,7 +19,6 @@ const items = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect1.webp",
     ],
-    price: "2,000,000₫",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -18,7 +27,6 @@ const items = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect2.webp",
     ],
-    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -27,7 +35,6 @@ const items = [
       "/assets/img/collection/3.webp",
       "/assets/img/collection/newcollect3.webp",
     ],
-    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -36,7 +43,30 @@ const items = [
       "/assets/img/collection/4.webp",
       "/assets/img/collection/newcollect4.webp",
     ],
-    price: "2,000,000đ",
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/2.webp",
+      "/assets/img/collection/newcollect2.webp",
+    ],
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/3.webp",
+      "/assets/img/collection/newcollect3.webp",
+    ],
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/4.webp",
+      "/assets/img/collection/newcollect4.webp",
+    ],
   },
 ];
 
@@ -48,7 +78,7 @@ const items2 = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect1.webp",
     ],
-    price: "2,000,000đ",
+    rank: 1,
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -57,7 +87,7 @@ const items2 = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect2.webp",
     ],
-    price: "2,000,000đ",
+    rank: 2,
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -66,7 +96,7 @@ const items2 = [
       "/assets/img/collection/3.webp",
       "/assets/img/collection/newcollect3.webp",
     ],
-    price: "2,000,000đ",
+    rank: 3,
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -75,7 +105,7 @@ const items2 = [
       "/assets/img/collection/4.webp",
       "/assets/img/collection/newcollect4.webp",
     ],
-    price: "2,000,000đ",
+    rank: 4,
   },
 ];
 
@@ -97,11 +127,30 @@ const tabs = [
     collection: items,
   },
 ];
-const NewCollection = () => {
-  const [activeTab, setActiveTab] = useState(0);
 
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+const BestSelling = () => {
+  const [activeTab, setActiveTab] = useState(0);
   return (
-    <section className="new-collection">
+    <section className="best-selling">
       <div className="container">
         <div className="heading-content d-flex justify-content-between mb-3">
           <div>
@@ -113,43 +162,22 @@ const NewCollection = () => {
             setActiveTab={setActiveTab}
           />
         </div>
-        <div className="item-collection">
-          {/* {tabs[activeTab].collection.map()} */}
-          <div className="row">
-            <div className="left-banner">
-              <a></a>
-              <img
-                src="https://file.hstatic.net/200000642007/file/mlb_newarrivals_rtw_w36_c224d1e0c7f44d8c9bb7adeb6a824609.jpg"
-                alt="image collection"
-              />
-            </div>
-            <div className="right-collection row">
-              {tabs[activeTab].collection.map((i) => (
-                // <div className="product col-sm-6 mb-4">
-                //   <div className="product__images">
-                //     <img src="/assets/img/collection/1.webp"></img>
-                //     <img src="/assets/img/collection/newcollect1.webp"></img>
-                //   </div>
-                //   <div className="bg-white">
-                //     <h4 className="p-2">{i.title}</h4>
-                //     <div className="d-flex ps-2">
-                //       {i.colors.map((c) => (
-                //         <div
-                //           className="color m-1"
-                //           style={{ backgroundColor: c }}
-                //         ></div>
-                //       ))}
-                //     </div>
-                //   </div>
-                // </div>
-                <Product item={i} />
-              ))}
-              {/* </div> */}
-            </div>
-          </div>
-        </div>
+      </div>
+      <div className="container">
+        <Carousel responsive={responsive} centerMode infinite>
+          {/* <div className="d-flex"> */}
+          {/* <div> */}
+          {tabs[activeTab].collection.map((i) => (
+            <Product item={i} />
+          ))}
+          {/* </div> */}
+          {/* </div> */}
+          {/* <div>Item 2</div>
+          <div>Item 3</div>
+          <div>Item 4</div> */}
+        </Carousel>
       </div>
     </section>
   );
 };
-export default NewCollection;
+export default BestSelling;
