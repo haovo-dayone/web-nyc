@@ -1,0 +1,103 @@
+.breadcrumb-container {
+  max-width: 1270px;
+  margin: auto;
+  margin-top: 4rem;
+  margin-bottom: 5rem;
+}
+.wrapper-cart {
+  // .container-wrapper-cart {
+  .main-cart {
+    .heading-cart {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .empty-cart {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 0;
+      a {
+        border: 1px solid #e8e8e8;
+        padding: 12px 32px;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .wrapper-cart {
+    .sidebar-cart {
+      padding-left: 32px;
+      position: sticky;
+      top: 24px;
+    }
+  }
+}
+.wrapper-cart {
+  .sidebar-cart {
+    padding-left: 32px;
+    position: sticky;
+    top: 24px;
+    .sidebar-cart-action {
+      button {
+        font-size: 16px;
+        line-height: 24px;
+        width: 100%;
+        background: #000000;
+        color: #ffffff;
+        border: none;
+        border-radius: 0 0 8px 8px;
+        height: 56px;
+        text-transform: uppercase;
+      }
+
+      button.disabled {
+        pointer-events: none;
+        background: #cccccc;
+      }
+    }
+  }
+  .sidebar-cart-inner {
+    border: 1px solid #e8e8e8;
+    padding: 20px 24px;
+    border-radius: 8px 8px 0 0;
+    h4 {
+      margin: 0 0 20px 0;
+      font-size: 18px;
+      line-height: 26px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .total-price-cart {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 700;
+    }
+  }
+}

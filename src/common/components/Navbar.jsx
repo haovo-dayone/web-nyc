@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Nav, Navbar as BootstrapNavbar } from "react-bootstrap";
 const Navbar = () => {
   return (
@@ -16,7 +17,7 @@ const Navbar = () => {
           // className="fas fa-bars fa-lg text-primary"
           className="col-sm-2"
         />
-        <BootstrapNavbar.Brand href="#" className="col-sm-2">
+        <BootstrapNavbar.Brand href="/" className="col-sm-2">
           <img
             src="/assets/img/logo/logo2.svg"
             className="image-fluid"
@@ -27,25 +28,37 @@ const Navbar = () => {
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto text">
             <Nav.Item>
-              <Nav.Link href="#home">QUẦN ÁO</Nav.Link>
+              <Link className="nav-link" href="/collection/apparel">
+                QUẦN ÁO
+              </Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="#features">MŨ NÓN</Nav.Link>
+              <Link className="nav-link" href="/collection/cap">
+                MŨ NÓN
+              </Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="#pricing">GIÀY DÉP</Nav.Link>
+              <Link className="nav-link" href="/collection/shoes">
+                GIÀY DÉP
+              </Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="#features">TÚI VÍ</Nav.Link>
+              <Link className="nav-link" href="/collection/bag">
+                TÚI VÍ
+              </Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="#pricing">PHỤ KIỆN</Nav.Link>
+              <Link className="nav-link" href="/collection/accessories">
+                PHỤ KIỆN
+              </Link>
             </Nav.Item>
           </Nav>
         </BootstrapNavbar.Collapse>
         <div className="icon ms-auto fs-5 d-flex position-absolute end-0 pe-1 pe-lg-5">
           <i className="fa-solid fa-magnifying-glass p-2"></i>
-          <i className="fa-solid fa-bag-shopping p-2"></i>
+          <Link href="/cart" className="text-dark">
+            <i className="fa-solid fa-bag-shopping p-2"></i>
+          </Link>
           <i className="fa-regular fa-heart p-2"></i>
           <i className="fa-solid fa-user-tie p-2"></i>
         </div>

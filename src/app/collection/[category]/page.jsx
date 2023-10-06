@@ -1,7 +1,54 @@
+"use client";
+
+import Breadcrumb from "@/collection/component/Breadcrumb";
+import Dropdown from "@/collection/component/Dropdown";
+import Product from "@/home/components/Product";
 import { useEffect, useState } from "react";
-import Product from "./Product";
-import CollectionTab from "./CollectionTab";
-const items = [
+
+const apparels = [
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/2.webp",
+      "/assets/img/collection/newcollect1.webp",
+    ],
+    rank: 1,
+    price: "2,000,000đ",
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/2.webp",
+      "/assets/img/collection/newcollect2.webp",
+    ],
+    rank: 2,
+    price: "2,000,000đ",
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/3.webp",
+      "/assets/img/collection/newcollect3.webp",
+    ],
+    rank: 3,
+    price: "2,000,000đ",
+  },
+  {
+    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
+    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
+    images: [
+      "/assets/img/collection/4.webp",
+      "/assets/img/collection/newcollect4.webp",
+    ],
+    rank: 4,
+    price: "2,000,000đ",
+  },
+];
+
+const caps = [
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
     colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
@@ -40,116 +87,60 @@ const items = [
   },
 ];
 
-const items2 = [
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect1.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect2.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/3.webp",
-      "/assets/img/collection/newcollect3.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/4.webp",
-      "/assets/img/collection/newcollect4.webp",
-    ],
-    price: "2,000,000đ",
-  },
-];
-
-const tabs = [
-  {
-    name: "QUẦN ÁO",
-    collection: items,
-  },
-  {
-    name: "NÓN",
-    collection: items2,
-  },
-  {
-    name: "GIÀY",
-    collection: items,
-  },
-  {
-    name: "TÚI",
-    collection: items,
-  },
-];
-const NewCollection = () => {
-  const [activeTab, setActiveTab] = useState(0);
+const Apparel = ({ params }) => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    console.log(params);
+    switch (params.category) {
+      case "apparel":
+        setProducts(apparels);
+        break;
+      case "cap":
+        setProducts(caps);
+        break;
+    }
+  }, [params]);
 
   return (
-    <section className="new-collection">
-      <div className="container">
-        <div className="heading-content d-flex justify-content-between mb-3">
-          <div>
-            <h3>HÀNG MỚI VỀ</h3>
-          </div>
-          <CollectionTab
-            tabs={tabs}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-        </div>
-        <div className="item-collection">
-          {/* {tabs[activeTab].collection.map()} */}
-          <div className="row">
-            <div className="left-banner">
-              <a></a>
-              <img
-                src="https://file.hstatic.net/200000642007/file/mlb_newarrivals_rtw_w36_c224d1e0c7f44d8c9bb7adeb6a824609.jpg"
-                alt="image collection"
-              />
-            </div>
-            <div className="right-collection row">
-              {tabs[activeTab].collection.map((i) => (
-                // <div className="product col-sm-6 mb-4">
-                //   <div className="product__images">
-                //     <img src="/assets/img/collection/1.webp"></img>
-                //     <img src="/assets/img/collection/newcollect1.webp"></img>
-                //   </div>
-                //   <div className="bg-white">
-                //     <h4 className="p-2">{i.title}</h4>
-                //     <div className="d-flex ps-2">
-                //       {i.colors.map((c) => (
-                //         <div
-                //           className="color m-1"
-                //           style={{ backgroundColor: c }}
-                //         ></div>
-                //       ))}
-                //     </div>
-                //   </div>
-                // </div>
-                <Product item={i} className="col-sm-6 mb-4" />
-              ))}
-              {/* </div> */}
-            </div>
+    <>
+      <div className="main-title-collection text-center">
+        <h1>Quần Áo</h1>
+      </div>
+      <div className="description-collection">
+        <div className="container">
+          <div className="des-collection">
+            <p className="text-center">
+              Bộ sưu tập <strong>Quần Áo MLB </strong> tại MLB Việt Nam - Thời
+              trang thể thao đa dạng.
+            </p>
+            <p className="description text-center">
+              <strong>MLB Việt Nam</strong> tự hào giới thiệu bộ sưu tập Áo MLB
+              với thiết kế đa dạng từ áo phông, áo hoodie đến áo khoác, sử dụng
+              chất liệu thoáng khí và co giãn để mang đến sự thoải mái và linh
+              hoạt khi bạn vận động. Khám phá bộ sưu tập Quần Áo MLB và tạo nên
+              phong cách thể thao đẳng cấp và nổi bật.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+      <div className="title-collection">
+        <div className="container">
+          <div className="tittle-collection-inner d-flex justify-content-between">
+            <Breadcrumb />
+            <Dropdown />
+          </div>
+        </div>
+      </div>
+      <div className="content-collection">
+        <div className="container">
+          <div className="row">
+            {products.map((i, index) => (
+              <Product key={index} item={i} className="col-sm-3" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
-export default NewCollection;
+export default Apparel;

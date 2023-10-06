@@ -1,10 +1,11 @@
+"use client";
 import { useState } from "react";
 
-const Product = ({ item }) => {
+const Product = ({ item, className }) => {
   const [imageHover, setImageHover] = useState(false);
 
   return (
-    <div className="product col-sm-6 mb-4">
+    <div className={`product ${className}`}>
       <div
         className="product__images"
         onMouseEnter={() => setImageHover(true)}

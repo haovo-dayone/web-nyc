@@ -19,6 +19,7 @@ const items = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect1.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -27,6 +28,7 @@ const items = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect2.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -35,6 +37,7 @@ const items = [
       "/assets/img/collection/3.webp",
       "/assets/img/collection/newcollect3.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -43,6 +46,7 @@ const items = [
       "/assets/img/collection/4.webp",
       "/assets/img/collection/newcollect4.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -51,6 +55,7 @@ const items = [
       "/assets/img/collection/2.webp",
       "/assets/img/collection/newcollect2.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -59,6 +64,7 @@ const items = [
       "/assets/img/collection/3.webp",
       "/assets/img/collection/newcollect3.webp",
     ],
+    price: "2,000,000đ",
   },
   {
     title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
@@ -67,6 +73,7 @@ const items = [
       "/assets/img/collection/4.webp",
       "/assets/img/collection/newcollect4.webp",
     ],
+    price: "2,000,000đ",
   },
 ];
 
@@ -154,7 +161,7 @@ const BestSelling = () => {
       <div className="container">
         <div className="heading-content d-flex justify-content-between mb-3">
           <div>
-            <h3>HÀNG MỚI VỀ</h3>
+            <h3>Hàng Bán Chạy</h3>
           </div>
           <CollectionTab
             tabs={tabs}

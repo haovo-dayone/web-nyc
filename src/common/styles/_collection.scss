@@ -1,0 +1,19 @@
+// .title-collection {
+//   text-align: center;
+//   font-size: 32px;
+//   line-height: 40px;
+// }
+.product__images {
+  position: relative;
+  img {
+    min-height: 25rem;
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+  .heart {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
