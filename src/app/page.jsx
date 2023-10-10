@@ -4,6 +4,7 @@ import { Carousel, Container } from "react-bootstrap";
 import "@/home/styles/index.scss";
 import BestSelling from "@/home/components/BestSelling";
 import Video from "@/home/components/Video";
+// import NewCollection from "../home/components/NewCollection";
 
 const Home = () => {
   return (
