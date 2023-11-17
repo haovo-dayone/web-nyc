@@ -1,3 +1,16 @@
 .best-selling {
   padding-top: 5rem;
 }
+
+.container {
+  padding: 4rem 48px;
+}
+
+// .heading-content {
+//   overflow: scroll;
+// }
+@media (max-width: 500px) {
+  .heading-content {
+    flex-direction: column;
+  }
+}

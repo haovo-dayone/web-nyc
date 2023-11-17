@@ -1,11 +1,16 @@
 "use client";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Product = ({ item, className }) => {
   const [imageHover, setImageHover] = useState(false);
 
+  // async function getListProduct() {
+
+  // }
+
   return (
-    <div className={`product ${className}`}>
+    <Link className={`product ${className}`} href={`/products/${item.id}`}>
       <div
         className="product__images"
         onMouseEnter={() => setImageHover(true)}
@@ -37,14 +42,8 @@ const Product = ({ item, className }) => {
         <h4 className="title p-2">{item.title}</h4>
         {item.price ? <span className="price p-2">{item.price}</span> : ""}
         {/* {item.price && <span className="price p-2">{item.price}</span>} */}
-
-        <div className="d-flex ps-2">
-          {item.colors.map((c) => (
-            <div className="color m-1" style={{ backgroundColor: c }}></div>
-          ))}
-        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,7 +1,8 @@
 .new-collection {
   padding-top: 5rem;
   .left-banner {
-    width: 55%;
+    // width: 55%;
+    height: 88rem;
   }
   .heading-content {
     h3 {
@@ -11,7 +12,7 @@
 }
 .right-collection {
   background: #f3f3f3;
-  width: 45%;
+  // width: 45%;
   padding-top: 45px;
   height: unset;
 
@@ -28,12 +29,17 @@
   // }
 }
 
-.product {
-  min-width: 20rem;
-  min-height: 30rem;
-}
-
 ul.react-multi-carousel-track li {
   width: 20rem !important;
   margin-right: 1rem;
+}
+
+.container {
+  padding: 0 48px;
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 !important;
+  }
 }

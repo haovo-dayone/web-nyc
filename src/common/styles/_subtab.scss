@@ -1,7 +1,6 @@
 .sub-tab {
   .item-slider-sub {
-    margin-right: 0px;
-    padding: 0 19.5px;
+    padding: 0 7px;
     border-radius: 34px;
     background-color: #fff;
     font-size: 18px;
@@ -16,5 +15,10 @@
   .item-slider-sub.active {
     background: #000000;
     color: #ffffff;
+  }
+}
+@media (max-width: 450px) {
+  .sub-tab {
+    padding-top: 0.5rem;
   }
 }

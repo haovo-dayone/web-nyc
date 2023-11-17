@@ -1,0 +1,89 @@
+.register {
+  .breadcrumb-container {
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 15px;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+  .layout-register-account {
+    width: 100%;
+    max-width: 1270px;
+    padding: 0 15px;
+    margin: 0 auto;
+    .content-register {
+      margin-top: 40px;
+      .heading-account {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+        border-bottom: 3px solid #000000;
+        padding: 0 0 8px 0;
+        margin: 0 0 24px 0;
+      }
+      .note-register {
+        margin: 0 0 15px 0;
+      }
+      .info-register {
+        margin-bottom: 48px;
+        .item-input-form {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 430px;
+          margin-bottom: 24px;
+          label {
+            margin: 0 0 8px 0;
+            position: relative;
+            width: max-content;
+          }
+          ::after {
+            content: "";
+            width: 4px;
+            height: 4px;
+            border-radius: 100%;
+            background: #f55060;
+            display: block;
+            position: absolute;
+            top: 6px;
+            right: -8px;
+          }
+          .form-input {
+            border: 1px solid #403e3e;
+            border-radius: 4px;
+            height: 44px;
+            padding: 12px 16px;
+            outline: none;
+            box-shadow: none;
+            width: 100%;
+            input::-webkit-input-placeholder {
+              color: black; /*Change the placeholder color*/
+              opacity: 0.5; /*Change the opacity between 0 and 1*/
+            }
+          }
+          .item-input-form-inner {
+            .password-wrapper {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+      .action-register {
+        margin-bottom: 48px;
+        text-align: center;
+        button {
+          padding: 12px 32px;
+          border: none;
+          border-radius: 4px;
+          background: #000000;
+          color: #ffffff;
+          font-size: 16px;
+          line-height: 24px;
+          text-transform: uppercase;
+          height: 48px;
+          min-width: 200px;
+        }
+      }
+    }
+  }
+}

@@ -7,23 +7,20 @@ const ModalVideo = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="p-0"
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+      {/* <Modal.Header closeButton></Modal.Header> */}
+      <Modal.Body className="p-0">
+        <iframe
+          id="fancybox-frame1698999152993"
+          name="fancybox-frame1698999152993"
+          className="fancybox-iframe"
+          allowFullScreen="allowfullscreen"
+          allow="autoplay; fullscreen"
+          src="https://www.youtube-nocookie.com/embed/2vZgBIwXOUI?autoplay=1&autohide=1&fs=1&rel=0&hd=1&wmode=transparent&enablejsapi=1&html5=1"
+          scrolling="no"
+        />
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 };

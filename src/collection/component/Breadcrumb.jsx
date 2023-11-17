@@ -7,8 +7,15 @@ const routeNames = {
   "/": "Trang Chủ",
   "/collection": "Danh Mục",
   "/apparel": "Quần Áo",
-  "/cap": "Mũ nón",
-  "/cart": "Giỏ hàng",
+  "/cap": "Mũ Nón",
+  "/cart": "Giỏ Hàng",
+  "/accessories": "Phụ Kiện",
+  "/shoes": "Giày Dép",
+  "/bag": "Túi Ví",
+  "/account": "Tài Khoản",
+  "/register": "Đăng Ký",
+  "/forgetpassword": "Quên Mật Khẩu",
+  "/accountUser": "Tài Khoản Người dùng",
 };
 
 const Breadcrumb = () => {
@@ -21,8 +28,8 @@ const Breadcrumb = () => {
 
   return (
     <BootstrapBreadcrumb className="text-secondary">
-      {paths.map((p) => (
-        <BootstrapBreadcrumb.Item href={`/${p}`}>
+      {paths.map((p, index) => (
+        <BootstrapBreadcrumb.Item href={`/${p}`} key={index}>
           {routeNames[`/${p}`]}
         </BootstrapBreadcrumb.Item>
       ))}

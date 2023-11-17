@@ -6,6 +6,7 @@
 .product__images {
   position: relative;
   img {
+    transition: opacity 2s;
     min-height: 25rem;
     &:nth-child(2) {
       display: none;

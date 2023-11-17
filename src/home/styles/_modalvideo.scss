@@ -1,0 +1,26 @@
+.modal-body {
+  width: 1100.44px;
+  height: 619px;
+  background: #000;
+  overflow: visible;
+  padding: 0;
+  display: inline-block;
+  margin: 0;
+  max-width: 100%;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+  .fancybox-iframe {
+    left: 0;
+    position: absolute;
+    top: 0;
+    background: transparent;
+    border: 0;
+    display: block;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+  }
+}

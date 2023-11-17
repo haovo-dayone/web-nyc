@@ -1,5 +1,4 @@
 import Breadcrumb from "@/collection/component/Breadcrumb";
-import "@/cart/styles/index.scss";
 
 const Cart = () => {
   return (

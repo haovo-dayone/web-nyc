@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <section className="footer">
-      <div className=" row justify-content-center">
-        <div className="col-9 row p-3">
+    <section className="footer mt-5">
+      <div className="row justify-content-center w-100">
+        <div className="col-9 row footer-container">
           <div className="col-md-4">
-            <h5>TRỢ GIÚP</h5>
+            <h5 className="mb-4">TRỢ GIÚP</h5>
             <ul>
               <li>
                 <a href="/">Hệ thống cửa hàng</a>
@@ -38,7 +38,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-md-3">
-            <h5>THANH TOÁN</h5>
+            <h5 className="mb-4">THANH TOÁN</h5>
             <ul>
               <li>
                 <a href="/">Visa / Mastercard / JCB</a>
@@ -61,7 +61,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-md-3">
-            <h5>GIAO HÀNG</h5>
+            <h5 className="mb-4">GIAO HÀNG</h5>
             <ul>
               <li>
                 <a href="/">Giao hàng tiêu chuẩn</a>
@@ -81,7 +81,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-md-2">
-            <h5>ABOUT US</h5>
+            <h5 className="mb-4">ABOUT US</h5>
             <a href="https://www.facebook.com/mlb.kr.vn" className="pe-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <div className="col-12 text-center text-white">
+          <div className="col-12 text-center footer-main-bottom">
             Bản quyền thuộc về MLB Korea được phân phối độc quyền tại Việt Nam
             bởi CÔNG TY CỔ PHẦN MAISON RETAIL MANAGEMENT INTERNATIONAL
             <br />

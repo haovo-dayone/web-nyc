@@ -11,7 +11,7 @@ const Video = () => {
   };
   return (
     <section className="video">
-      <div className="container">
+      <div className="container ">
         <div>
           <h3>Video</h3>
         </div>

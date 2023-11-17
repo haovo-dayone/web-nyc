@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import { Nav, Navbar as BootstrapNavbar } from "react-bootstrap";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:3001/api";
 const Navbar = () => {
   return (
     <section className="header">
@@ -60,7 +63,9 @@ const Navbar = () => {
             <i className="fa-solid fa-bag-shopping p-2"></i>
           </Link>
           <i className="fa-regular fa-heart p-2"></i>
-          <i className="fa-solid fa-user-tie p-2"></i>
+          <Link href="/account/login" className="text-dark">
+            <i className="fa-solid fa-user-tie p-2"></i>
+          </Link>
         </div>
       </BootstrapNavbar>
     </section>

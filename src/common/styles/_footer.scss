@@ -3,12 +3,28 @@
   ul {
     list-style: none;
     padding-left: 0;
+    font-size: 15px;
+    li {
+      margin-bottom: 15px;
+    }
   }
   a {
     color: #fff;
     text-decoration: none;
+    margin-bottom: 15px;
   }
   h5 {
     color: #fff;
   }
+}
+.footer-main-bottom {
+  width: 100%;
+  color: #c4c4c4;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 30px;
+}
+.footer-container {
+  padding: 5rem;
 }

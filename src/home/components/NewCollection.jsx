@@ -1,104 +1,38 @@
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import CollectionTab from "./CollectionTab";
-const items = [
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect1.webp",
-    ],
-    price: "2,000,000₫",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect2.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/3.webp",
-      "/assets/img/collection/newcollect3.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/4.webp",
-      "/assets/img/collection/newcollect4.webp",
-    ],
-    price: "2,000,000đ",
-  },
-];
 
-const items2 = [
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect1.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/2.webp",
-      "/assets/img/collection/newcollect2.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/3.webp",
-      "/assets/img/collection/newcollect3.webp",
-    ],
-    price: "2,000,000đ",
-  },
-  {
-    title: "MLB - Áo thun unisex cổ tròn tay ngắn Pop Art Graphic Overfit",
-    colors: ["#0d6efd", "#e9ecef", "#6f42c1", "#dc3545", "#000"],
-    images: [
-      "/assets/img/collection/4.webp",
-      "/assets/img/collection/newcollect4.webp",
-    ],
-    price: "2,000,000đ",
-  },
-];
-
-const tabs = [
-  {
-    name: "QUẦN ÁO",
-    collection: items,
-  },
-  {
-    name: "NÓN",
-    collection: items2,
-  },
-  {
-    name: "GIÀY",
-    collection: items,
-  },
-  {
-    name: "TÚI",
-    collection: items,
-  },
-];
 const NewCollection = () => {
   const [activeTab, setActiveTab] = useState(0);
+  // let [productList, setProductList] = useState([]);
+  let [categories, setCategory] = useState([]);
+
+  const fetchcategory = async () => {
+    const res = await fetch(
+      "http://localhost:1337/api/categories?populate[products][populate]=*"
+    );
+    const data = await res.json();
+    const cates = data.data.map((c) => ({
+      name: c.attributes.category_name,
+      collection: c.attributes.products.data.map((p) => ({
+        title: p.attributes.Name,
+        price: p.attributes.price,
+        images: p.attributes.Product_Image.data.map(
+          (i) => `http://localhost:1337${i.attributes.url}`
+        ),
+        createdAt: p.attributes.createdAt,
+        id: p.id,
+      })),
+    }));
+    cates.forEach((c) =>
+      c.collection.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    );
+    setCategory(cates);
+  };
+
+  useEffect(() => {
+    fetchcategory();
+  }, []);
 
   return (
     <section className="new-collection">
@@ -108,7 +42,7 @@ const NewCollection = () => {
             <h3>HÀNG MỚI VỀ</h3>
           </div>
           <CollectionTab
-            tabs={tabs}
+            tabs={categories}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
@@ -116,33 +50,16 @@ const NewCollection = () => {
         <div className="item-collection">
           {/* {tabs[activeTab].collection.map()} */}
           <div className="row">
-            <div className="left-banner">
+            <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 left-banner">
               <a></a>
               <img
                 src="https://file.hstatic.net/200000642007/file/mlb_newarrivals_rtw_w36_c224d1e0c7f44d8c9bb7adeb6a824609.jpg"
                 alt="image collection"
               />
             </div>
-            <div className="right-collection row">
-              {tabs[activeTab].collection.map((i) => (
-                // <div className="product col-sm-6 mb-4">
-                //   <div className="product__images">
-                //     <img src="/assets/img/collection/1.webp"></img>
-                //     <img src="/assets/img/collection/newcollect1.webp"></img>
-                //   </div>
-                //   <div className="bg-white">
-                //     <h4 className="p-2">{i.title}</h4>
-                //     <div className="d-flex ps-2">
-                //       {i.colors.map((c) => (
-                //         <div
-                //           className="color m-1"
-                //           style={{ backgroundColor: c }}
-                //         ></div>
-                //       ))}
-                //     </div>
-                //   </div>
-                // </div>
-                <Product item={i} className="col-sm-6 mb-4" />
+            <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 right-collection row">
+              {categories[activeTab]?.collection.slice(0, 4).map((i, index) => (
+                <Product item={i} key={index} className="col-md-6 mb-4" />
               ))}
               {/* </div> */}
             </div>
