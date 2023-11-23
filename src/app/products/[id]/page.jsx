@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 
-const images = [
-  "/assets/img/productdetail/anhao.jpg",
-  "/assets/img/productdetail/anhao1.webp",
-  "/assets/img/productdetail/anhao2.webp",
-  "/assets/img/productdetail/anhao3.webp",
-  "/assets/img/productdetail/anhao4.webp",
-  "/assets/img/productdetail/anhao5.webp",
-];
+// const images = [
+//   "/assets/img/productdetail/anhao.jpg",
+//   "/assets/img/productdetail/anhao1.webp",
+//   "/assets/img/productdetail/anhao2.webp",
+//   "/assets/img/productdetail/anhao3.webp",
+//   "/assets/img/productdetail/anhao4.webp",
+//   "/assets/img/productdetail/anhao5.webp",
+// ];
 const sizes = [
   { name: "XS" },
   { name: "S" },
@@ -24,28 +24,42 @@ const productDetail = ({ params }) => {
   const [active, setActive] = useState(0);
   const [amount, setAmount] = useState(1);
   const router = useRouter();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
+
+  const fetchProductDetail = async () => {
+    const res = await fetch(
+      `http://localhost:1337/api/products/${params.id}?populate=sizes%2Ccategory%2CProduct_Image`
+    );
+    const data = await res.json();
+    console.log("data", data);
+    const productdetail = {
+      name: data.data.attributes.Name,
+      // title: p.attributes.Name,
+      price: data.data.attributes.price,
+      images: data.data.attributes.Product_Image.data.map(
+        (i) => `http://localhost:1337${i.attributes.url}`
+      ),
+      sizes: data.data.attributes.sizes.data.map((s) => s.attributes.name),
+      id: data.data.id,
+    };
+    setProduct(productdetail);
+  };
+  // useEffect(() => {
+  //   fetchProductDetail();
+  // }, []);
 
   useEffect(() => {
-    if (params.id) {
-      fetch(`http://localhost:1337/api/products/${params.id}`)
-        .then((response) => response.json())
-        .then((data) => setProduct(data));
-    }
+    // if (params.id) {
+    //   fetch(`http://localhost:1337/api/products/${params.id}`)
+    //     .then((response) => response.json())
+    //     .then((data) => setProduct(data));
+    // }
+    fetchProductDetail();
   }, [params.id]);
+
   if (!product) {
     return <div>Product not found</div>;
   }
-
-  //const handleClick = (e) => {
-  //   if (sizeActive !== "") {
-  //     const oldSelectedSize = document.getElementById(sizeActive);
-  //     oldSelectedSize.setAttribute("class", "item-swatch");
-  //   }
-  //   e.target.setAttribute("class", "item-swatch active");
-
-  //   setSizeActive(e.target.getAttribute("id"));
-  // };
   return (
     <div className="product-detail">
       <div className="container">
@@ -58,7 +72,7 @@ const productDetail = ({ params }) => {
                 indicators={true}
                 activeIndex={active}
               >
-                {images.map((item) => (
+                {product.images?.map((item) => (
                   <Carousel.Item>
                     <div className="w-100">
                       <img src={item}></img>
@@ -68,7 +82,7 @@ const productDetail = ({ params }) => {
               </Carousel>
             </div>
             <div className="d-flex justify-content-center">
-              {images.map((item, index) => (
+              {product.images?.map((item, index) => (
                 <div
                   className="item-image-detail bg-warning"
                   onClick={() => {
@@ -84,15 +98,12 @@ const productDetail = ({ params }) => {
             <div className="info-product-detail">
               <div className="heading-product-detail d-flex">
                 <div className="title-product-detail">
-                  <h1>
-                    MLB - Áo sweatshirt unisex tay dài Classic Monogram Bag Big
-                    Logo Overfit
-                  </h1>
+                  <h1>{product.name}</h1>
                 </div>
                 <i class="fa-regular fa-heart p-2"></i>
               </div>
               <div className="price-product-detail">
-                <span>2,390,000đ</span>
+                <span>{product.price}</span>
               </div>
               <div className="color-product-detail">
                 <div className="item-swatch">
@@ -170,14 +181,14 @@ const productDetail = ({ params }) => {
                       </span>
                     </div>
                     <div className="swatch-size">
-                      {sizes.map((s, index) => (
+                      {product.sizes?.map((s, index) => (
                         <div
                           className={`item-swatch ${
                             sizeActive === index && "active"
                           }`}
                           onClick={() => setSizeActive(index)}
                         >
-                          {s.name}
+                          {s}
                         </div>
                       ))}
                       {/* <a

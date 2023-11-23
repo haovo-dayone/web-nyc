@@ -41,7 +41,7 @@ const Cart = () => {
                 <span className="text-empty-cart">
                   Không có sản phẩm nào trong giỏ hàng
                 </span>
-                <a href="/collections/all">Tiếp tục mua hàng</a>
+                <a href="/">Tiếp tục mua hàng</a>
               </div>
             </div>
           </div>

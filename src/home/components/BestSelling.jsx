@@ -68,16 +68,9 @@ const BestSelling = () => {
       <div className="container">
         {categories[activeTab] && (
           <Carousel responsive={responsive} centerMode infinite>
-            {/* <div className="d-flex"> */}
-            {/* <div> */}
             {categories[activeTab].collection.map((i) => (
               <Product item={i} key={i.title} />
             ))}
-            {/* </div> */}
-            {/* </div> */}
-            {/* <div>Item 2</div>
-          <div>Item 3</div>
-          <div>Item 4</div> */}
           </Carousel>
         )}
       </div>

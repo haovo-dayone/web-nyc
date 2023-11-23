@@ -52,6 +52,7 @@ const Apparel = ({ params }) => {
       ),
       price: p.attributes.price,
       createAt: p.attributes.createAt,
+      id: p.id,
     }));
     setProducts(product);
     // const cates = data2.data.map((c) => ({
