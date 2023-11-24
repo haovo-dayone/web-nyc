@@ -3,35 +3,39 @@ import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 
-// const images = [
-//   "/assets/img/productdetail/anhao.jpg",
-//   "/assets/img/productdetail/anhao1.webp",
-//   "/assets/img/productdetail/anhao2.webp",
-//   "/assets/img/productdetail/anhao3.webp",
-//   "/assets/img/productdetail/anhao4.webp",
-//   "/assets/img/productdetail/anhao5.webp",
-// ];
-const sizes = [
-  { name: "XS" },
-  { name: "S" },
-  { name: "M" },
-  { name: "L" },
-  { name: "XL" },
-];
-
 const productDetail = ({ params }) => {
   const [sizeActive, setSizeActive] = useState(0);
   const [active, setActive] = useState(0);
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(0);
   const router = useRouter();
   const [product, setProduct] = useState({});
+  const [cartItems, setCartItems] = useState([]);
+  const [cartId, setCartId] = useState(0);
+  const [user, setUser] = useState({});
+
+  const addToCart = async (product) => {
+    const updatedCart = [...cartItems];
+    const existingItem = updatedCart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
+      existingItem.quantity += 1;
+    } else {
+      // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào giỏ hàng với số lượng là 1
+      updatedCart.push({ product: { ...product }, quantity: 1 });
+    }
+
+    setCartItems(updatedCart);
+  };
+
+  const handleClick = () => {};
 
   const fetchProductDetail = async () => {
     const res = await fetch(
       `http://localhost:1337/api/products/${params.id}?populate=sizes%2Ccategory%2CProduct_Image`
     );
     const data = await res.json();
-    console.log("data", data);
+    // console.log("data", data);
     const productdetail = {
       name: data.data.attributes.Name,
       // title: p.attributes.Name,
@@ -43,10 +47,54 @@ const productDetail = ({ params }) => {
       id: data.data.id,
     };
     setProduct(productdetail);
+
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+    if (user) {
+      const res2 = await fetch(
+        `http://localhost:1337/api/users/${user.id}?populate=*`
+      );
+      const data2 = await res2.json();
+      if (!data2.cart) {
+        const res = await fetch("http://localhost:1337/api/carts", {
+          method: "POST",
+          body: JSON.stringify({
+            data: {
+              user: user.id,
+              products: [],
+            },
+          }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+        const data = res.json();
+        console.log(data);
+        setCartId(data.id);
+        return;
+      }
+
+      setCartId(data2.cart.id);
+      setCartItems(data2.cart.products);
+    }
   };
-  // useEffect(() => {
-  //   fetchProductDetail();
-  // }, []);
+
+  const updateCart = async () => {
+    await fetch("http://localhost:1337/api/carts/" + cartId, {
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          user: user.id,
+          products: [...cartItems, { product: product, quantity: amount }],
+        },
+      }),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+  };
+  useEffect(() => {
+    updateCart();
+  }, [cartItems]);
 
   useEffect(() => {
     // if (params.id) {
@@ -55,7 +103,7 @@ const productDetail = ({ params }) => {
     //     .then((data) => setProduct(data));
     // }
     fetchProductDetail();
-  }, [params.id]);
+  }, [params.id, user]);
 
   if (!product) {
     return <div>Product not found</div>;
@@ -290,7 +338,9 @@ const productDetail = ({ params }) => {
                       </div>
                     </div>
                     <div className="action-detail">
-                      <button>Thêm vào giỏ</button>
+                      <button onClick={() => addToCart(product)}>
+                        Thêm vào giỏ
+                      </button>
                       <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
