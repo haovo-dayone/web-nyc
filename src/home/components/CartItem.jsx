@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Item = [
-  {
-    image: "",
-    title: "",
-    quantity: "",
-    price: "",
-  },
-];
+// const Item = [
+//   {
+//     image: "",
+//     title: "",
+//     quantity: "",
+//     price: "",
+//   },
+// ];
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, updateToCart, DeleteCartItems, handleSelect }) => {
+  // const [cartItems, setCartItems] = useState([]);
+  // const removeFromCart = (productId) => {
+  //   const updatedCart = cartItems.filter((item) => item.id !== productId);
+  //   setCartItems(updatedCart);
+  // };
   return (
     <div className="item-cart ">
       <div className="box-media-item-cart">
@@ -18,7 +23,8 @@ const CartItem = ({ item }) => {
             <input
               className="input-item-line "
               type="checkbox"
-              defaultChecked=""
+              checked={item.selected}
+              onClick={(e) => handleSelect(e, item)}
             />
           </div>
           <div className="img-media">
@@ -37,45 +43,22 @@ const CartItem = ({ item }) => {
                 {item.product.name}
               </a>
             </div>
-            <div className="variant-item">07CBL / M / 3FPTB2234</div>
-            <div className="quantity-item">{`So luong ${item.quantity}`}</div>
+            {/* <div className="variant-item">07CBL / M / 3FPTB2234</div> */}
+            <div className="quantity-item">{`Số  lượng: ${item.quantity}`}</div>
             <div className="price-item">{item.product.price}</div>
           </div>
-        </div>
-        <div className="box-delete-mobile">
-          <a href="/cart/change?line=1&quantity=0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={20}
-              height={20}
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              {" "}
-              <path
-                d="M13.9998 6L5.99988 14"
-                stroke="black"
-                strokeLinecap="square"
-                strokeLinejoin="round"
-              />{" "}
-              <path
-                d="M6 6L13.9999 14"
-                stroke="black"
-                strokeLinecap="square"
-                strokeLinejoin="round"
-              />{" "}
-            </svg>
-          </a>
         </div>
       </div>
       <div className="box-action-item-cart">
         <div className="line-box-action">
-          <a className="change-option" data-quantity={1}>
-            Thay đổi tùy chọn
-          </a>
-          <a href="/cart/change?line=1&quantity=0" className="delete-option">
+          <span className="change-option">Thay đổi tùy chọn</span>
+          <span
+            // href="/cart"
+            className="delete-option"
+            onClick={() => DeleteCartItems(item.product.id)}
+          >
             Xóa
-          </a>
+          </span>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const productDetail = ({ params }) => {
   const [sizeActive, setSizeActive] = useState(0);
   const [active, setActive] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const router = useRouter();
   const [product, setProduct] = useState({});
   const [cartItems, setCartItems] = useState([]);
@@ -15,7 +15,9 @@ const productDetail = ({ params }) => {
 
   const addToCart = async (product) => {
     const updatedCart = [...cartItems];
-    const existingItem = updatedCart.find((item) => item.id === product.id);
+    const existingItem = updatedCart.find(
+      (item) => item.product.id === product.id
+    );
 
     if (existingItem) {
       // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
@@ -24,7 +26,7 @@ const productDetail = ({ params }) => {
       // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào giỏ hàng với số lượng là 1
       updatedCart.push({ product: { ...product }, quantity: 1 });
     }
-
+    // alert(`${product.name} đã được thêm vào giỏ hàng!`);
     setCartItems(updatedCart);
   };
 
@@ -48,7 +50,6 @@ const productDetail = ({ params }) => {
     };
     setProduct(productdetail);
 
-    setUser(JSON.parse(localStorage.getItem("userInfo")));
     if (user) {
       const res2 = await fetch(
         `http://localhost:1337/api/users/${user.id}?populate=*`
@@ -84,7 +85,7 @@ const productDetail = ({ params }) => {
       body: JSON.stringify({
         data: {
           user: user.id,
-          products: [...cartItems, { product: product, quantity: amount }],
+          products: [...cartItems],
         },
       }),
       headers: {
@@ -104,6 +105,10 @@ const productDetail = ({ params }) => {
     // }
     fetchProductDetail();
   }, [params.id, user]);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
 
   if (!product) {
     return <div>Product not found</div>;
@@ -286,7 +291,11 @@ const productDetail = ({ params }) => {
                       <div className="wrapper-quantity">
                         <button
                           className="btn-minus"
-                          onClick={() => setAmount(amount - 1)}
+                          onClick={() =>
+                            setAmount((amount) =>
+                              amount === 1 ? 1 : amount - 1
+                            )
+                          }
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -360,7 +369,9 @@ const productDetail = ({ params }) => {
                           ></rect>{" "}
                         </svg>
                       </span>
-                      <button>Mua Ngay</button>
+                      <a href="/cart">
+                        <button>Mua Ngay</button>
+                      </a>
                     </div>
                   </div>
                 </div>

@@ -146,6 +146,19 @@
                   font-weight: 400;
                   height: 56px;
                 }
+                a {
+                  width: 49%;
+                  border: none;
+                  background: transparent;
+                  font-size: 16px;
+                  line-height: 20px;
+                  color: #ffffff;
+                  text-transform: uppercase;
+                  font-weight: 400;
+                  height: 56px;
+                  justify-content: center;
+                  display: flex;
+                }
                 span {
                   svg {
                     vertical-align: middle;

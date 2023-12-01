@@ -37,6 +37,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 20px;
         .box-media-item-cart {
           display: flex;
           align-items: center;
@@ -69,7 +70,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            a {
+            span {
               border: 1px solid #e8e8e8;
               border-radius: 2px;
               padding: 6px 8px;
@@ -79,6 +80,20 @@
             }
           }
         }
+      }
+    }
+    .back-shopping {
+      text-align: center;
+      margin-top: 12px;
+      padding-top: 48px;
+      border-top: 1px solid #e8e8e8;
+      span {
+        border: 1px solid #e8e8e8;
+        padding: 12px 32px;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: 4px;
+        display: inline-block;
       }
     }
   }
@@ -109,11 +124,6 @@
         border-radius: 0 0 8px 8px;
         height: 56px;
         text-transform: uppercase;
-      }
-
-      button.disabled {
-        pointer-events: none;
-        background: #cccccc;
       }
     }
   }

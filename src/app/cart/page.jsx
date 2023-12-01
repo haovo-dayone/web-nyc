@@ -5,12 +5,37 @@ import CartItem from "@/home/components/CartItem";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  let cart = {};
-  let user = {};
-  if (typeof localStorage !== "undefined") {
-    user = JSON.parse(localStorage.getItem("userInfo"));
-    cart = JSON.parse(localStorage.getItem("cart"));
-  }
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cartId, setCartId] = useState(0);
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
+
+  // const updateToCart = async (product) => {
+  //   // const updatedCart = [...cartItems];
+  //   const updatedItems = cartItems.filter((item) => item.id !== product.id);
+
+  //   setCartItems(updatedItems);
+  // };
+
+  // const updateCart = async () => {
+  //   await fetch("http://localhost:1337/api/carts/" + cartId, {
+  //     method: "PUT",
+  //     body: JSON.stringify({
+  //       data: {
+  //         user: user.id,
+  //         products: [...cartItems],
+  //       },
+  //     }),
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //   });
+  // };
+  // useEffect(() => {
+  //   updateCart();
+  // }, [cartItems]);
 
   const fetchCartData = async () => {
     try {
@@ -18,23 +43,100 @@ const Cart = () => {
         `http://localhost:1337/api/users/${user.id}?populate=*`
       );
       const data = await res.json();
-      console.log(data);
-
-      // console.log(data.carts;
-      setCartItems(data.cart.products);
+      let cartItems = data.cart.products.map((product) => {
+        return {
+          ...product,
+          selected: false,
+        };
+      });
+      // console.log(data);
+      setCartId(data.cart.id);
+      setCartItems(cartItems);
+      tempTotalPrice = 0;
     } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu giỏ hàng:", error);
+      // console.error("Lỗi khi lấy dữ liệu giỏ hàng:", error);
     }
   };
-  // localStorage.setItem("cart", data.carts);
-  // localStorage.setItem("userInfo", JSON.stringify(data.user));
+  const handleSelectAllChange = (event) => {
+    console.log(event.target.checked);
+    setCartItems((prevItems) => {
+      return prevItems.map((item) => {
+        return {
+          ...item,
+          selected: event.target.checked,
+        };
+      });
+    });
+  };
 
+  const handleSelect = (event, item) => {
+    console.log(event.target.checked, item);
+    const newList = cartItems.map((i) => {
+      if (i.product.id === item.product.id) {
+        return {
+          ...i,
+          selected: event.target.checked,
+        };
+      } else return i;
+    });
+    console.log("123", newList);
+    setCartItems(newList);
+  };
+
+  const DeleteCartItems = async (productId) => {
+    const existingItem = [...cartItems];
+    const updatedCart = existingItem.filter(
+      (item) => item.product.id !== productId
+    );
+
+    // alert(`${product.name} đã được thêm vào giỏ hàng!`);
+    setCartItems(updatedCart);
+  };
+
+  const updateCart = async () => {
+    await fetch(`http://localhost:1337/api/carts/${cartId}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          products: [...cartItems],
+        },
+      }),
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+  };
+  useEffect(() => {
+    cartItems.length !== 0 && updateCart();
+  }, [cartItems]);
+
+  const updateToCart = async (product) => {
+    const updatedItems = cartItems.filter(
+      (item) => item.product.id !== product
+    );
+    console.log("cartItems", cartItems);
+    console.log("product", product);
+
+    setCartItems(updatedItems);
+  };
   useEffect(() => {
     fetchCartData();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
+    updateCart();
     console.log(cartItems);
+    setTotalPrice(
+      cartItems.reduce((totalPrice, item) => {
+        return (
+          totalPrice +
+          Number(item.product.price) *
+            Number(item.quantity) *
+            Number(item.selected)
+        );
+      }, 0)
+    );
   }, [cartItems]);
   return (
     <>
@@ -47,20 +149,28 @@ const Cart = () => {
               <div className="heading-cart">
                 <input
                   type="checkbox"
-                  defaultChecked=""
                   className="select-all"
+                  onChange={handleSelectAllChange}
                 />
                 <span className="ms-2">Chọn tất cả</span>
               </div>
-              {cart?.length > 0 ? (
+              {cartItems?.length > 0 ? (
                 <>
                   <div className="body-cart">
                     {cartItems.map((item) => (
-                      <CartItem item={item} key={item.id} />
+                      <CartItem
+                        item={item}
+                        key={item.id}
+                        updateToCart={updateToCart}
+                        DeleteCartItems={DeleteCartItems}
+                        handleSelect={handleSelect}
+                      />
                     ))}
                   </div>
                   <div class="back-shopping">
-                    <a href="/collections/all">Tiếp tục mua hàng</a>
+                    <span>
+                      <a href="/">Tiếp tục mua hàng</a>
+                    </span>
                   </div>
                 </>
               ) : (
@@ -70,7 +180,6 @@ const Cart = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       width={64}
                       height={64}
-                      viewBox="0 0 64 64"
                       fill="none"
                     >
                       {" "}
@@ -100,20 +209,20 @@ const Cart = () => {
                 <ul>
                   <li>
                     <label>Tạm tính</label>
-                    <span className="subtotal-price">0₫</span>
+                    <span className="subtotal-price">{`${totalPrice} VND`}</span>
                   </li>
                   <li>
-                    <label>Phí vận chuyển</label>
-                    <span>-</span>
+                    <labe1>Phí vận chuyển</labe1>
+                    <span>15000</span>
                   </li>
                 </ul>
                 <div className="total-price-cart">
                   <label>Tổng đơn hàng</label>
-                  <span className="total-price">0₫</span>
+                  <span className="total-price">{totalPrice + 15000}₫</span>
                 </div>
               </div>
               <div className="sidebar-cart-action">
-                <button id="process-checkout" className="disabled">
+                <button id="process-checkout" className="">
                   Thanh toán
                 </button>
               </div>
