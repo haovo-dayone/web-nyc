@@ -1,0 +1,18 @@
+.layout-payment {
+  .container {
+    padding: 0 48px;
+    .wrapper-payment {
+      margin: 60px auto;
+      width: 100%;
+      max-width: 430px;
+      .form-pay {
+        width: fit-content;
+        .logo {
+          i {
+            font-size: 6rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 import Breadcrumb from "@/collection/component/Breadcrumb";
 import { useEffect, useState } from "react";
 import CartItem from "@/home/components/CartItem";
+import { pay } from "../../common/utils/payment.jsx";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -46,7 +47,7 @@ const Cart = () => {
       let cartItems = data.cart.products.map((product) => {
         return {
           ...product,
-          selected: false,
+          selected: true,
         };
       });
       // console.log(data);
@@ -138,6 +139,16 @@ const Cart = () => {
       }, 0)
     );
   }, [cartItems]);
+
+  const handleOnPay = () => {
+    const order = {
+      amount: totalPrice,
+      bankCode: "",
+      orderDescription: "",
+      orderType: "",
+    };
+    pay(order);
+  };
   return (
     <>
       <div className="breadcrumb-container">
@@ -197,7 +208,7 @@ const Cart = () => {
                   <span className="text-empty-cart">
                     Không có sản phẩm nào trong giỏ hàng
                   </span>
-                  <a href="/">Tiếp tục mua hàng</a>
+                  <a href="/#bestselling">Tiếp tục mua hàng</a>
                 </div>
               )}
             </div>
@@ -209,7 +220,7 @@ const Cart = () => {
                 <ul>
                   <li>
                     <label>Tạm tính</label>
-                    <span className="subtotal-price">{`${totalPrice} VND`}</span>
+                    <span className="subtotal-price">{`${totalPrice}₫`}</span>
                   </li>
                   <li>
                     <labe1>Phí vận chuyển</labe1>
@@ -222,7 +233,11 @@ const Cart = () => {
                 </div>
               </div>
               <div className="sidebar-cart-action">
-                <button id="process-checkout" className="">
+                <button
+                  id="process-checkout"
+                  className=""
+                  onClick={handleOnPay}
+                >
                   Thanh toán
                 </button>
               </div>

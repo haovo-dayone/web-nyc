@@ -52,7 +52,7 @@ const BestSelling = () => {
   }, []);
 
   return (
-    <section className="best-selling">
+    <section id="bestselling" className="best-selling">
       <div className="container ">
         <div className="heading-content d-flex justify-content-between mb-3">
           <div>

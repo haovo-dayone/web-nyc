@@ -28,7 +28,7 @@ const CartItem = ({ item, updateToCart, DeleteCartItems, handleSelect }) => {
             />
           </div>
           <div className="img-media">
-            <a href="/products/mlb-quan-jogger-nu-lung-thun-basic-athleisure-medium-logo-3fptb2234-3">
+            <a href={`/products/${item.product.id}`}>
               <img
                 src={item.product.images[0]}
                 alt="MLB - Quần jogger nữ lưng thun Basic Athleisure Medium Logo"
@@ -39,9 +39,7 @@ const CartItem = ({ item, updateToCart, DeleteCartItems, handleSelect }) => {
         <div className="box-info">
           <div className="box-info-inner">
             <div className="title-item">
-              <a href="/products/mlb-quan-jogger-nu-lung-thun-basic-athleisure-medium-logo-3fptb2234-3">
-                {item.product.name}
-              </a>
+              <a href={`/products/${item.product.id}`}>{item.product.name}</a>
             </div>
             {/* <div className="variant-item">07CBL / M / 3FPTB2234</div> */}
             <div className="quantity-item">{`Số  lượng: ${item.quantity}`}</div>
@@ -51,7 +49,7 @@ const CartItem = ({ item, updateToCart, DeleteCartItems, handleSelect }) => {
       </div>
       <div className="box-action-item-cart">
         <div className="line-box-action">
-          <span className="change-option">Thay đổi tùy chọn</span>
+          {/* <span className="change-option">Thay đổi tùy chọn</span> */}
           <span
             // href="/cart"
             className="delete-option"
